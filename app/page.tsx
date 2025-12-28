@@ -105,9 +105,15 @@ export default function HomePage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-4">
-                <div className="w-11 h-11 bg-gradient-to-br from-dict-accent to-grafana-blue rounded-xl flex items-center justify-center shadow-lg">
-                  <Server className="w-6 h-6 text-white" />
-                </div>
+                <div className="flex items-center justify-center space-x-3">
+                    <Image 
+                      src="/logo.png" 
+                      alt="DICT Logo" 
+                      width={80} 
+                      height={80}
+                      className="rounded-2xl shadow-2xl"
+                    />
+                    </div>
                 <div>
                   <h1 className="text-xl font-display font-bold tracking-tight">
                     <span className="text-dict-accent">DICT</span>
