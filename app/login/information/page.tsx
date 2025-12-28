@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Database, ArrowLeft } from 'lucide-react'
+import { Megaphone, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 
 export default function InformationLoginPage() {
@@ -23,13 +23,13 @@ export default function InformationLoginPage() {
         <div className="text-center mb-8">
           <div className="flex items-center justify-center mb-4">
             <div className="p-5 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-600 shadow-2xl">
-              <Database className="w-14 h-14 text-white" strokeWidth={2.5} />
+              <Megaphone className="w-14 h-14 text-white" strokeWidth={2.5} />
             </div>
           </div>
           <h1 className="text-4xl font-display font-bold mb-2">
             <span className="text-pink-500">Information Division</span>
           </h1>
-          <p className="text-muted-foreground font-medium text-lg">Admin Portal Login</p>
+          <p className="text-muted-foreground font-medium text-lg">News, Media & Publicity Portal</p>
         </div>
 
         <Card className="border-dict-border/30 shadow-2xl">
@@ -49,7 +49,7 @@ export default function InformationLoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full px-4 py-3 bg-dict-panel border border-dict-border/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all text-foreground placeholder:text-muted-foreground"
-                  placeholder="admin@dict.gov"
+                  placeholder="admin@dict.gov.pg"
                   required
                 />
               </div>
@@ -63,8 +63,8 @@ export default function InformationLoginPage() {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-3 bg-dict-panel border border-dict-border/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all text-foreground placeholder:text-muted-foreground"
-                  placeholder="••••••••"
+                  className="w-full px-4 py-3 bg-dict-panel border border-dict-border/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all text-foreground"
+                  placeholder="Enter your password"
                   required
                 />
               </div>
@@ -73,41 +73,40 @@ export default function InformationLoginPage() {
                 <label className="flex items-center space-x-2 cursor-pointer">
                   <input
                     type="checkbox"
-                    className="w-4 h-4 rounded border-dict-border/30 bg-dict-panel text-pink-500 focus:ring-2 focus:ring-pink-500"
+                    className="w-4 h-4 rounded border-dict-border/30 bg-dict-panel text-pink-500 focus:ring-2 focus:ring-pink-500 focus:ring-offset-0"
                   />
-                  <span className="text-sm text-muted-foreground font-medium">Remember me</span>
+                  <span className="text-sm font-medium">Remember me</span>
                 </label>
-                <button
-                  type="button"
-                  className="text-sm text-pink-500 hover:text-pink-500/80 font-semibold transition-colors"
-                >
+                <button type="button" className="text-sm font-semibold text-pink-500 hover:underline">
                   Forgot password?
                 </button>
               </div>
 
               <Button
                 type="submit"
-                className="w-full bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-500/90 hover:to-rose-600/90 font-semibold tracking-wide py-6 text-base shadow-lg"
+                className="w-full bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-500/90 hover:to-rose-600/90 text-white font-semibold py-6 text-base shadow-lg"
                 size="lg"
               >
-                Sign In to Information Dashboard
+                Login to Dashboard
               </Button>
             </form>
 
-            <div className="mt-6 pt-6 border-t border-dict-border/30">
-              <Link href="/">
-                <Button variant="ghost" className="w-full hover:bg-dict-panel font-medium">
+            <div className="mt-6 text-center">
+              <Link href="/portal">
+                <Button variant="ghost" className="text-muted-foreground hover:text-foreground font-medium">
                   <ArrowLeft className="w-4 h-4 mr-2" />
-                  Back to Home
+                  Back to Staff Portal
                 </Button>
               </Link>
             </div>
           </CardContent>
         </Card>
 
-        <p className="text-center text-sm text-muted-foreground mt-6 font-medium">
-          &copy; 2026 DICT - Information Division
-        </p>
+        <div className="mt-6 p-4 rounded-lg bg-dict-panel/50 border border-dict-border/30">
+          <p className="text-xs text-center text-muted-foreground">
+            Secure access for authorized Information Division administrators only. All login attempts are monitored and logged.
+          </p>
+        </div>
       </div>
     </div>
   )

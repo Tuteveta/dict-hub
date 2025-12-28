@@ -152,7 +152,10 @@ export default function HRDashboard() {
               Employees
             </TabsTrigger>
             <TabsTrigger value="recruitment" className="data-[state=active]:bg-grafana-orange data-[state=active]:shadow-lg font-semibold rounded-lg">
-              Recruitment
+              Job Postings
+            </TabsTrigger>
+            <TabsTrigger value="applications" className="data-[state=active]:bg-grafana-orange data-[state=active]:shadow-lg font-semibold rounded-lg">
+              Applications
             </TabsTrigger>
             <TabsTrigger value="reports" className="data-[state=active]:bg-grafana-orange data-[state=active]:shadow-lg font-semibold rounded-lg">
               Reports
@@ -291,56 +294,174 @@ export default function HRDashboard() {
             </Card>
           </TabsContent>
 
-          {/* Recruitment Tab */}
+          {/* Job Postings Tab */}
           <TabsContent value="recruitment">
             <Card className="border-dict-border/30">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div>
-                    <CardTitle className="text-3xl font-display font-bold tracking-tight">Active Recruitments</CardTitle>
-                    <CardDescription className="text-base font-medium">Track ongoing recruitment processes</CardDescription>
+                    <CardTitle className="text-3xl font-display font-bold tracking-tight">Job Postings</CardTitle>
+                    <CardDescription className="text-base font-medium">Manage internal and external job advertisements</CardDescription>
                   </div>
                   <Button className="bg-gradient-to-r from-grafana-orange to-red-600 hover:from-grafana-orange/90 hover:to-red-600/90 font-semibold">
                     <UserPlus className="w-4 h-4 mr-2" />
-                    New Position
+                    Create Job Posting
                   </Button>
                 </div>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {recruitmentData.map((recruitment, index) => (
+                  {[
+                    { id: 'JOB-001', title: 'Senior Software Engineer', department: 'IT', type: 'External', applicants: 24, status: 'Active', deadline: '2026-02-28', posted: '2026-01-20' },
+                    { id: 'JOB-002', title: 'HR Manager', department: 'HR', type: 'External', applicants: 15, status: 'Active', deadline: '2026-02-25', posted: '2026-01-18' },
+                    { id: 'JOB-003', title: 'Team Lead - M&E', department: 'M&E', type: 'Internal', applicants: 8, status: 'Active', deadline: '2026-02-20', posted: '2026-01-15' },
+                    { id: 'JOB-004', title: 'Budget Officer', department: 'Finance', type: 'Both', applicants: 18, status: 'Active', deadline: '2026-02-20', posted: '2026-01-15' },
+                  ].map((job) => (
                     <div
-                      key={index}
+                      key={job.id}
                       className="p-6 rounded-xl bg-dict-panel/50 border border-dict-border/30 hover:border-grafana-orange/30 transition-all duration-300"
                     >
                       <div className="flex items-start justify-between mb-4">
                         <div>
-                          <h3 className="font-bold text-lg mb-1">{recruitment.position}</h3>
-                          <p className="text-sm text-muted-foreground">{recruitment.department} Department</p>
+                          <h3 className="font-bold text-lg mb-1">{job.title}</h3>
+                          <p className="text-sm text-muted-foreground">{job.id} • {job.department} Department</p>
                         </div>
-                        <div className="px-3 py-1.5 rounded-full text-sm font-bold border bg-grafana-blue/10 text-grafana-blue border-grafana-blue/20">
-                          {recruitment.status}
+                        <div className="flex items-center space-x-2">
+                          <div className={`px-3 py-1.5 rounded-full text-sm font-bold border ${
+                            job.type === 'External'
+                              ? 'bg-grafana-blue/10 text-grafana-blue border-grafana-blue/20'
+                              : job.type === 'Internal'
+                              ? 'bg-grafana-purple/10 text-grafana-purple border-grafana-purple/20'
+                              : 'bg-grafana-green/10 text-grafana-green border-grafana-green/20'
+                          }`}>
+                            {job.type}
+                          </div>
+                          <div className="px-3 py-1.5 rounded-full text-sm font-bold border bg-grafana-green/10 text-grafana-green border-grafana-green/20">
+                            {job.status}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-4 gap-4 mb-4">
+                        <div>
+                          <p className="text-xs text-muted-foreground mb-1">Applicants</p>
+                          <p className="text-2xl font-bold">{job.applicants}</p>
+                        </div>
+                        <div>
+                          <p className="text-xs text-muted-foreground mb-1">Posted</p>
+                          <p className="font-semibold text-sm">{new Date(job.posted).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</p>
+                        </div>
+                        <div>
+                          <p className="text-xs text-muted-foreground mb-1">Deadline</p>
+                          <p className="font-semibold text-sm">{new Date(job.deadline).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</p>
+                        </div>
+                        <div className="text-right">
+                          <Button variant="ghost" size="sm" className="hover:bg-grafana-orange/10 font-semibold">
+                            View Applications
+                          </Button>
+                        </div>
+                      </div>
+
+                      <div className="flex space-x-2">
+                        <Button variant="ghost" size="sm" className="flex-1 hover:bg-grafana-orange/10">
+                          Edit Posting
+                        </Button>
+                        <Button variant="ghost" size="sm" className="flex-1 hover:bg-grafana-orange/10">
+                          Close Position
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Applications Tab */}
+          <TabsContent value="applications">
+            <Card className="border-dict-border/30">
+              <CardHeader>
+                <CardTitle className="text-3xl font-display font-bold tracking-tight">Job Applications</CardTitle>
+                <CardDescription className="text-base font-medium">Review and manage all job applications</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {[
+                    { id: 'APP-045', applicant: 'Sarah Johnson', position: 'Senior Software Engineer', type: 'External', submitted: '2026-01-26', status: 'Under Review', experience: '7 years' },
+                    { id: 'APP-044', applicant: 'Michael Chen', position: 'Team Lead - M&E', type: 'Internal', submitted: '2026-01-25', status: 'Shortlisted', experience: '5 years' },
+                    { id: 'APP-043', applicant: 'Emily Williams', position: 'Budget Officer', type: 'External', submitted: '2026-01-24', status: 'New', experience: '4 years' },
+                    { id: 'APP-042', applicant: 'James Brown', position: 'HR Manager', type: 'External', submitted: '2026-01-23', status: 'Interview Scheduled', experience: '6 years' },
+                    { id: 'APP-041', applicant: 'Lisa Anderson', position: 'Team Lead - M&E', type: 'Internal', submitted: '2026-01-22', status: 'Under Review', experience: '3 years' },
+                  ].map((app) => (
+                    <div
+                      key={app.id}
+                      className="p-6 rounded-xl bg-dict-panel/50 border border-dict-border/30 hover:border-grafana-orange/30 transition-all duration-300"
+                    >
+                      <div className="flex items-start justify-between mb-4">
+                        <div>
+                          <h3 className="font-bold text-lg mb-1">{app.applicant}</h3>
+                          <p className="text-sm text-muted-foreground">{app.id} • Applied for: {app.position}</p>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <div className={`px-3 py-1.5 rounded-full text-sm font-bold border ${
+                            app.type === 'Internal'
+                              ? 'bg-grafana-purple/10 text-grafana-purple border-grafana-purple/20'
+                              : 'bg-grafana-blue/10 text-grafana-blue border-grafana-blue/20'
+                          }`}>
+                            {app.type}
+                          </div>
+                          <div className={`px-3 py-1.5 rounded-full text-sm font-bold border ${
+                            app.status === 'New'
+                              ? 'bg-grafana-yellow/10 text-grafana-yellow border-grafana-yellow/20'
+                              : app.status === 'Shortlisted'
+                              ? 'bg-grafana-green/10 text-grafana-green border-grafana-green/20'
+                              : app.status === 'Interview Scheduled'
+                              ? 'bg-grafana-blue/10 text-grafana-blue border-grafana-blue/20'
+                              : 'bg-grafana-orange/10 text-grafana-orange border-grafana-orange/20'
+                          }`}>
+                            {app.status}
+                          </div>
                         </div>
                       </div>
 
                       <div className="grid grid-cols-3 gap-4 mb-4">
                         <div>
-                          <p className="text-xs text-muted-foreground mb-1">Total Applicants</p>
-                          <p className="text-2xl font-bold">{recruitment.applicants}</p>
+                          <p className="text-xs text-muted-foreground mb-1">Experience</p>
+                          <p className="font-semibold">{app.experience}</p>
                         </div>
                         <div>
-                          <p className="text-xs text-muted-foreground mb-1">Shortlisted</p>
-                          <p className="text-2xl font-bold text-grafana-green">{recruitment.shortlisted}</p>
+                          <p className="text-xs text-muted-foreground mb-1">Submitted</p>
+                          <p className="font-semibold text-sm">{new Date(app.submitted).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
                         </div>
-                        <div>
-                          <p className="text-xs text-muted-foreground mb-1">Success Rate</p>
-                          <p className="text-2xl font-bold">{Math.round((recruitment.shortlisted / recruitment.applicants) * 100)}%</p>
+                        <div className="text-right">
+                          <Button variant="ghost" size="sm" className="hover:bg-grafana-orange/10 font-semibold">
+                            View Full Application
+                          </Button>
                         </div>
                       </div>
 
-                      <Button variant="ghost" className="w-full hover:bg-grafana-orange/10 font-semibold">
-                        View Applicants
-                      </Button>
+                      <div className="flex space-x-2">
+                        <Button 
+                          className="flex-1 bg-gradient-to-r from-grafana-green to-emerald-600 hover:from-grafana-green/90 hover:to-emerald-600/90 font-semibold"
+                          size="sm"
+                        >
+                          Shortlist
+                        </Button>
+                        <Button 
+                          variant="outline"
+                          className="flex-1 border-grafana-blue/30 hover:bg-grafana-blue/10 hover:border-grafana-blue text-grafana-blue font-semibold"
+                          size="sm"
+                        >
+                          Schedule Interview
+                        </Button>
+                        <Button 
+                          variant="outline"
+                          className="flex-1 border-grafana-red/30 hover:bg-grafana-red/10 hover:border-grafana-red text-grafana-red font-semibold"
+                          size="sm"
+                        >
+                          Reject
+                        </Button>
+                      </div>
                     </div>
                   ))}
                 </div>

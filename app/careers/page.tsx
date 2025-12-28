@@ -12,11 +12,10 @@ import {
   ArrowRight,
   Search,
   LogIn,
-  Building2,
-  Shield
+  Building2
 } from 'lucide-react'
 import Link from 'next/link'
-import Image from 'next/image'
+
 // External job postings only
 const externalJobs = [
   {
@@ -94,31 +93,24 @@ export default function HomePage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 bg-gradient-to-br from-dict-accent/20 to-grafana-blue/20 rounded-xl flex items-center justify-center shadow-lg backdrop-blur-sm border border-white/10 overflow-hidden">
-  <Image 
-    src="/logo.png" 
-    alt="DICT Logo" 
-    width={40} 
-    height={40}
-    className="object-contain"
-    priority
-  />
-</div>
+                <div className="w-12 h-12 bg-gradient-to-br from-dict-accent to-grafana-blue rounded-xl flex items-center justify-center shadow-lg">
+                  <Building2 className="w-7 h-7 text-white" />
+                </div>
                 <div>
                   <h1 className="text-2xl font-display font-bold tracking-tight">
                     <span className="text-dict-accent">DICT</span>
-                    <span className="text-white"> Online Recruitment Portal</span>
+                    <span className="text-white"> Careers</span>
                   </h1>
-                  <p className="text-xs text-muted-foreground font-medium tracking-wide">Department of Information and Communications Technology</p>
+                  <p className="text-xs text-muted-foreground font-medium tracking-wide">External Recruitment - Public Access</p>
                 </div>
               </div>
             </div>
             
             <div className="flex items-center space-x-3">
-              <Link href="/staff-login">
+              <Link href="/">
                 <Button className="button-glow font-semibold">
                   <LogIn className="w-4 h-4 mr-2" />
-                  Staff Login
+                  Staff Portal
                 </Button>
               </Link>
             </div>
@@ -130,11 +122,14 @@ export default function HomePage() {
       <section className="bg-gradient-to-br from-dict-dark via-dict-panel to-dict-dark py-20 border-b border-dict-border/30">
         <div className="container mx-auto px-8">
           <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-block px-4 py-2 bg-dict-accent/10 border border-dict-accent/20 rounded-full mb-6">
+              <p className="text-sm font-semibold text-dict-accent">Public Job Portal - External Candidates</p>
+            </div>
             <h2 className="text-6xl font-display font-bold mb-6 tracking-tight">
-              Welcome to <span className="text-dict-accent">DICT Recruitment Portal</span>
+              Join the Future of <span className="text-dict-accent">Digital PNG</span>
             </h2>
             <p className="text-xl text-muted-foreground font-medium mb-8 leading-relaxed">
-              Join the Department of Information and Communications Technology and help drive Papua New Guinea's digital transformation. Browse our current job openings and apply online.
+              Explore exciting career opportunities at the Department of Information and Communications Technology. Help us drive Papua New Guinea's digital transformation.
             </p>
             <div className="flex items-center justify-center space-x-8">
               <div className="text-center">
@@ -161,17 +156,17 @@ export default function HomePage() {
         <div className="mb-8 p-6 rounded-xl bg-gradient-to-r from-grafana-blue/10 to-grafana-purple/10 border border-grafana-blue/20">
           <div className="flex items-start space-x-4">
             <div className="p-3 bg-grafana-blue/20 rounded-lg">
-              <Shield className="w-6 h-6 text-grafana-blue" />
+              <Users className="w-6 h-6 text-grafana-blue" />
             </div>
             <div className="flex-1">
               <h3 className="font-bold text-lg mb-2">Current DICT Staff?</h3>
               <p className="text-muted-foreground mb-3">
-                If you're a DICT existing and active member, please use the Staff Login to select your division and access your dashboard.
+                If you're an existing DICT employee, please visit the Staff Portal to access internal job postings, your employee dashboard, and other internal resources.
               </p>
-              <Link href="/staff-login">
+              <Link href="/">
                 <Button variant="outline" className="border-grafana-blue/30 hover:bg-grafana-blue/10">
                   <LogIn className="w-4 h-4 mr-2" />
-                  Staff Login
+                  Go to Staff Portal
                 </Button>
               </Link>
             </div>
@@ -215,8 +210,11 @@ export default function HomePage() {
         <div className="space-y-6">
           <div className="flex items-center justify-between">
             <h3 className="text-3xl font-display font-bold">
-              Current Job Openings ({filteredJobs.length})
+              Available Positions ({filteredJobs.length})
             </h3>
+            <div className="px-4 py-2 bg-dict-panel border border-dict-border/30 rounded-lg">
+              <p className="text-sm font-semibold">External Applications Only</p>
+            </div>
           </div>
 
           {filteredJobs.length === 0 ? (
@@ -237,6 +235,9 @@ export default function HomePage() {
                         <h3 className="text-2xl font-bold font-display group-hover:text-dict-accent transition-colors">
                           {job.title}
                         </h3>
+                        <span className="px-3 py-1 rounded-full text-xs font-bold border bg-grafana-blue/10 text-grafana-blue border-grafana-blue/20">
+                          External
+                        </span>
                       </div>
                       <p className="text-muted-foreground mb-4">{job.description}</p>
                       
@@ -339,9 +340,9 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
             <p className="font-medium">&copy; 2026 Department of Information and Communications Technology. All rights reserved.</p>
             <div className="flex items-center space-x-4">
-              <Link href="/staff-login" className="hover:text-dict-accent transition-colors font-medium">Staff Login</Link>
+              <Link href="/" className="hover:text-dict-accent transition-colors font-medium">Staff Portal</Link>
               <span>•</span>
-              <Link href="/" className="hover:text-dict-accent transition-colors font-medium">Careers</Link>
+              <Link href="/careers" className="hover:text-dict-accent transition-colors font-medium">Careers</Link>
             </div>
           </div>
         </div>

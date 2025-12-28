@@ -166,6 +166,9 @@ export default function EmployeeDashboard() {
               <TabsTrigger value="apply" className="data-[state=active]:bg-dict-accent data-[state=active]:shadow-lg font-semibold rounded-lg">
                 Apply for Leave
               </TabsTrigger>
+              <TabsTrigger value="jobs" className="data-[state=active]:bg-dict-accent data-[state=active]:shadow-lg font-semibold rounded-lg">
+                Internal Jobs
+              </TabsTrigger>
               <TabsTrigger value="profile" className="data-[state=active]:bg-dict-accent data-[state=active]:shadow-lg font-semibold rounded-lg">
                 My Profile
               </TabsTrigger>
@@ -301,6 +304,126 @@ export default function EmployeeDashboard() {
                     Submit Leave Request
                   </Button>
                 </form>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Internal Jobs Tab */}
+          <TabsContent value="jobs">
+            <Card className="border-dict-border/30">
+              <CardHeader>
+                <CardTitle className="text-3xl font-display font-bold tracking-tight">Internal Job Opportunities</CardTitle>
+                <CardDescription className="text-base font-medium">Apply for positions within DICT</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {[
+                    { 
+                      id: 'JOB-003', 
+                      title: 'Team Lead - M&E', 
+                      department: 'M&E', 
+                      level: 'Senior', 
+                      deadline: '2026-02-20',
+                      salary: 'K90,000 - K110,000',
+                      description: 'Lead the Monitoring & Evaluation team in assessing program effectiveness.',
+                      requirements: ['5+ years M&E experience', 'Team leadership', 'Data analysis', 'Report writing'],
+                      isNew: true
+                    },
+                    { 
+                      id: 'JOB-004', 
+                      title: 'Budget Officer', 
+                      department: 'Finance', 
+                      level: 'Mid-level', 
+                      deadline: '2026-02-20',
+                      salary: 'K60,000 - K85,000',
+                      description: 'Manage departmental budgets and financial planning processes.',
+                      requirements: ['Accounting certification', 'Budget management', '3+ years experience'],
+                      isNew: false
+                    },
+                    { 
+                      id: 'JOB-005', 
+                      title: 'Policy Analyst', 
+                      department: 'Policy', 
+                      level: 'Mid-level', 
+                      deadline: '2026-02-18',
+                      salary: 'K65,000 - K90,000',
+                      description: 'Research and develop ICT policies for government implementation.',
+                      requirements: ['Policy analysis', 'Research skills', 'ICT knowledge', 'Writing proficiency'],
+                      isNew: true
+                    },
+                  ].map((job) => (
+                    <div
+                      key={job.id}
+                      className="p-6 rounded-xl bg-dict-panel/50 border border-dict-border/30 hover:border-dict-accent/30 transition-all duration-300"
+                    >
+                      <div className="flex items-start justify-between mb-4">
+                        <div>
+                          <div className="flex items-center space-x-2 mb-2">
+                            <h3 className="font-bold text-xl">{job.title}</h3>
+                            {job.isNew && (
+                              <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-dict-accent/20 text-dict-accent border border-dict-accent/30">
+                                NEW
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-sm text-muted-foreground mb-2">{job.id} • {job.department} Department • {job.level}</p>
+                          <p className="text-sm mb-3">{job.description}</p>
+                        </div>
+                      </div>
+
+                      <div className="mb-4">
+                        <p className="text-sm font-semibold mb-2">Requirements:</p>
+                        <div className="flex flex-wrap gap-2">
+                          {job.requirements.map((req, index) => (
+                            <span
+                              key={index}
+                              className="px-3 py-1 bg-dict-dark border border-dict-border/30 rounded-full text-xs font-medium"
+                            >
+                              {req}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-3 gap-4 mb-4 pb-4 border-b border-dict-border/30">
+                        <div>
+                          <p className="text-xs text-muted-foreground mb-1">Salary Range</p>
+                          <p className="font-semibold text-sm">{job.salary}</p>
+                        </div>
+                        <div>
+                          <p className="text-xs text-muted-foreground mb-1">Application Deadline</p>
+                          <p className="font-semibold text-sm">{new Date(job.deadline).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
+                        </div>
+                        <div>
+                          <p className="text-xs text-muted-foreground mb-1">Type</p>
+                          <p className="font-semibold text-sm">Internal Only</p>
+                        </div>
+                      </div>
+
+                      <div className="flex space-x-3">
+                        <Button className="flex-1 button-glow font-semibold">
+                          Apply for Position
+                        </Button>
+                        <Button variant="outline" className="flex-1">
+                          View Full Details
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Application Tip */}
+                <div className="mt-6 p-4 rounded-xl bg-grafana-blue/10 border border-grafana-blue/20">
+                  <div className="flex items-start space-x-3">
+                    <Briefcase className="w-5 h-5 text-grafana-blue mt-0.5" />
+                    <div>
+                      <p className="font-semibold text-sm mb-1 text-grafana-blue">Internal Application Advantage</p>
+                      <p className="text-xs text-muted-foreground">
+                        As a current DICT employee, your application is automatically prioritized and you'll receive faster feedback on your application status.
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </TabsContent>
