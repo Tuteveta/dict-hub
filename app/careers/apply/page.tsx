@@ -1,13 +1,14 @@
 'use client'
 
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft, Upload, Briefcase } from 'lucide-react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 
-export default function ApplyPage() {
+// Separate component that uses useSearchParams
+function ApplyForm() {
   const searchParams = useSearchParams()
   const jobId = searchParams.get('job')
   
@@ -219,5 +220,21 @@ export default function ApplyPage() {
         </Card>
       </main>
     </div>
+  )
+}
+
+// Main page component with Suspense boundary
+export default function ApplyPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-dict-darker flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-dict-accent border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Loading application form...</p>
+        </div>
+      </div>
+    }>
+      <ApplyForm />
+    </Suspense>
   )
 }
