@@ -94,20 +94,20 @@ export default function HomePage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 bg-gradient-to-br from-dict-accent/20 to-grafana-blue/20 rounded-xl flex items-center justify-center shadow-lg backdrop-blur-sm border border-white/10 overflow-hidden">
-  <Image 
-    src="/logo.png" 
-    alt="DICT Logo" 
-    width={40} 
-    height={40}
-    className="object-contain"
-    priority
-  />
-</div>
+                <div className="w-12 h-12 flex items-center justify-center">
+                                <Image 
+                                  src="/logo.png" 
+                                  alt="DICT Logo" 
+                                  width={50} 
+                                  height={50}
+                                  className="object-contain"
+                                  priority
+                                />
+                              </div>
                 <div>
                   <h1 className="text-2xl font-display font-bold tracking-tight">
                     <span className="text-dict-accent">DICT</span>
-                    <span className="text-white"> Online Recruitment Portal</span>
+                    <span className="text-white"> Recruitment Portal</span>
                   </h1>
                   <p className="text-xs text-muted-foreground font-medium tracking-wide">Department of Information and Communications Technology</p>
                 </div>

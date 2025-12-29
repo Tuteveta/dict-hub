@@ -144,19 +144,16 @@ export default function HomePage() {
         <div className="container mx-auto px-8 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <div className="relative">
-  <div className="absolute inset-0 bg-gradient-to-br from-dict-accent to-blue-500 rounded-2xl blur-xl opacity-30"></div>
-  <div className="relative w-12 h-12 bg-gradient-to-br from-dict-accent/20 to-blue-500/20 rounded-2xl flex items-center justify-center overflow-hidden backdrop-blur-sm border border-white/10">
-    <Image 
-      src="/logo.png" 
-      alt="DICT Logo" 
-      width={40} 
-      height={40}
-      className="object-contain"
-      priority
-    />
-  </div>
-</div>
+              <div className="w-12 h-12 flex items-center justify-center">
+                <Image 
+                  src="/logo.png" 
+                  alt="DICT Logo" 
+                  width={50} 
+                  height={50}
+                  className="object-contain"
+                  priority
+                />
+              </div>
               <div>
                 <h1 className="text-2xl font-display font-bold tracking-tight bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
                   DICT Staff Portal
@@ -286,61 +283,36 @@ export default function HomePage() {
 
           {/* Divisions Grid */}
           <TabsContent value="divisions" className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
               {divisions.map((division, index) => (
                 <Link 
                   key={division.id} 
                   href={division.href} 
-                  className="animate-fade-in block h-full group" 
+                  className="animate-fade-in block group" 
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
-                  <div className="relative h-full">
-                    {/* Glow effect */}
-                    <div className={`absolute -inset-1 bg-gradient-to-r ${division.gradient} rounded-3xl blur-2xl opacity-0 group-hover:opacity-30 transition-all duration-500 ${division.glowColor}`}></div>
-                    
-                    {/* Card */}
-                    <Card className="relative h-full border-white/10 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md hover:from-white/15 hover:to-white/10 transition-all duration-500 group-hover:scale-[1.02] group-hover:shadow-2xl overflow-hidden">
-                      {/* Top gradient bar */}
-                      <div className={`h-1.5 bg-gradient-to-r ${division.gradient}`} />
-                      
-                      <CardHeader className="pb-4 space-y-6 relative">
-                        {/* Floating gradient orb background */}
-                        <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${division.gradient} rounded-full blur-3xl opacity-10 group-hover:opacity-20 transition-opacity duration-500`}></div>
-                        
-                        <div className="flex items-start justify-between gap-4 relative z-10">
-                          {/* Icon */}
-                          <div className="relative">
-                            <div className={`absolute inset-0 bg-gradient-to-br ${division.gradient} rounded-2xl blur-xl opacity-50 group-hover:opacity-70 transition-opacity duration-500`}></div>
-                            <div className={`relative p-4 rounded-2xl bg-gradient-to-br ${division.gradient} shadow-2xl ${division.glowColor}`}>
-                              <division.icon className="w-8 h-8 text-white" strokeWidth={2.5} />
-                            </div>
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                    <Card className="relative border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+                      <CardContent className="p-6">
+                        <div className="flex items-start justify-between mb-5">
+                          <div className={`p-4 rounded-xl bg-gradient-to-br ${division.gradient} border border-white/10`}>
+                            <division.icon className="w-6 h-6 text-white" />
                           </div>
-                          
-                          {/* Arrow indicator */}
                           <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-0 group-hover:translate-x-1">
-                            <div className="p-2.5 rounded-xl bg-white/10 border border-white/20 backdrop-blur-sm">
-                              <ChevronRight className="w-5 h-5 text-white" />
-                            </div>
+                            <ChevronRight className="w-5 h-5 text-slate-400" />
                           </div>
                         </div>
-                        
-                        {/* Title and description */}
-                        <div className="space-y-3 relative z-10">
-                          <CardTitle className="text-2xl font-display font-bold tracking-tight leading-tight text-white">
-                            {division.name}
-                          </CardTitle>
-                          <CardDescription className="text-sm font-medium leading-relaxed text-slate-300 line-clamp-2">
-                            {division.description}
-                          </CardDescription>
+                        <div className="space-y-3">
+                          <h3 className="text-2xl font-display font-bold tracking-tight text-white">{division.name}</h3>
+                          <p className="text-sm text-slate-400 font-medium leading-relaxed min-h-[2.5rem]">{division.description}</p>
                         </div>
-                      </CardHeader>
-                      
-                      <CardContent className="space-y-6 relative z-10">
+                        
                         {/* Stats */}
-                        <div className="grid grid-cols-3 gap-4 p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                        <div className="grid grid-cols-3 gap-3 mt-6 pt-6 border-t border-white/10">
                           {Object.entries(division.stats).map(([key, stat]) => (
                             <div key={key} className="text-center">
-                              <p className="text-2xl font-bold text-white tracking-tight mb-1" title={stat.value}>
+                              <p className="text-xl font-bold text-white tracking-tight mb-1" title={stat.value}>
                                 {stat.value}
                               </p>
                               <p className="text-xs text-slate-400 font-medium truncate" title={stat.label}>
@@ -349,15 +321,6 @@ export default function HomePage() {
                             </div>
                           ))}
                         </div>
-                        
-                        {/* Button */}
-                        <Button 
-                          className={`w-full bg-gradient-to-r ${division.gradient} hover:shadow-2xl ${division.glowColor} font-bold text-base py-6 rounded-xl transition-all duration-500 group-hover:scale-105`}
-                          size="lg"
-                        >
-                          <span>Access Dashboard</span>
-                          <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-                        </Button>
                       </CardContent>
                     </Card>
                   </div>
@@ -367,66 +330,41 @@ export default function HomePage() {
               {/* Employee Portal Card */}
               <Link 
                 href="/login/employee" 
-                className="animate-fade-in block h-full group" 
+                className="animate-fade-in block group" 
                 style={{ animationDelay: '600ms' }}
               >
-                <div className="relative h-full">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-dict-accent to-blue-500 rounded-3xl blur-2xl opacity-0 group-hover:opacity-30 transition-all duration-500 shadow-dict-accent/20"></div>
-                  
-                  <Card className="relative h-full border-white/10 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md hover:from-white/15 hover:to-white/10 transition-all duration-500 group-hover:scale-[1.02] group-hover:shadow-2xl overflow-hidden">
-                    <div className="h-1.5 bg-gradient-to-r from-dict-accent to-blue-500" />
-                    
-                    <CardHeader className="pb-4 space-y-6 relative">
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-dict-accent to-blue-500 rounded-full blur-3xl opacity-10 group-hover:opacity-20 transition-opacity duration-500"></div>
-                      
-                      <div className="flex items-start justify-between gap-4 relative z-10">
-                        <div className="relative">
-                          <div className="absolute inset-0 bg-gradient-to-br from-dict-accent to-blue-500 rounded-2xl blur-xl opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
-                          <div className="relative p-4 rounded-2xl bg-gradient-to-br from-dict-accent to-blue-500 shadow-2xl shadow-dict-accent/20">
-                            <UserCircle className="w-8 h-8 text-white" strokeWidth={2.5} />
-                          </div>
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                  <Card className="relative border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+                    <CardContent className="p-6">
+                      <div className="flex items-start justify-between mb-5">
+                        <div className="p-4 rounded-xl bg-gradient-to-br from-dict-accent to-blue-500 border border-white/10">
+                          <UserCircle className="w-6 h-6 text-white" />
                         </div>
-                        
                         <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-0 group-hover:translate-x-1">
-                          <div className="p-2.5 rounded-xl bg-white/10 border border-white/20 backdrop-blur-sm">
-                            <ChevronRight className="w-5 h-5 text-white" />
-                          </div>
+                          <ChevronRight className="w-5 h-5 text-slate-400" />
                         </div>
                       </div>
-                      
-                      <div className="space-y-3 relative z-10">
-                        <CardTitle className="text-2xl font-display font-bold tracking-tight leading-tight text-white">
-                          Employee Portal
-                        </CardTitle>
-                        <CardDescription className="text-sm font-medium leading-relaxed text-slate-300 line-clamp-2">
-                          Leave management, internal jobs, and employee self-service
-                        </CardDescription>
+                      <div className="space-y-3">
+                        <h3 className="text-2xl font-display font-bold tracking-tight text-white">Employee Portal</h3>
+                        <p className="text-sm text-slate-400 font-medium leading-relaxed min-h-[2.5rem]">Leave management, internal jobs, and employee self-service</p>
                       </div>
-                    </CardHeader>
-                    
-                    <CardContent className="space-y-6 relative z-10">
-                      <div className="grid grid-cols-3 gap-4 p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                      
+                      {/* Stats */}
+                      <div className="grid grid-cols-3 gap-3 mt-6 pt-6 border-t border-white/10">
                         <div className="text-center">
-                          <p className="text-2xl font-bold text-white tracking-tight mb-1">487</p>
+                          <p className="text-xl font-bold text-white tracking-tight mb-1">487</p>
                           <p className="text-xs text-slate-400 font-medium truncate">Staff</p>
                         </div>
                         <div className="text-center">
-                          <p className="text-2xl font-bold text-white tracking-tight mb-1">15</p>
+                          <p className="text-xl font-bold text-white tracking-tight mb-1">15</p>
                           <p className="text-xs text-slate-400 font-medium truncate">Requests</p>
                         </div>
                         <div className="text-center">
-                          <p className="text-2xl font-bold text-white tracking-tight mb-1">3</p>
+                          <p className="text-xl font-bold text-white tracking-tight mb-1">3</p>
                           <p className="text-xs text-slate-400 font-medium truncate">Jobs</p>
                         </div>
                       </div>
-                      
-                      <Button 
-                        className="w-full bg-gradient-to-r from-dict-accent to-blue-500 hover:shadow-2xl shadow-dict-accent/20 font-bold text-base py-6 rounded-xl transition-all duration-500 group-hover:scale-105"
-                        size="lg"
-                      >
-                        <span>Access Portal</span>
-                        <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-                      </Button>
                     </CardContent>
                   </Card>
                 </div>
